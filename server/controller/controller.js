@@ -23,11 +23,11 @@ async function get_Categories(req,res){
 }
 
 // post:http://localhost:8080/api/transaction
-async function create_Transaction(req,res){
+async function create_transaction(req,res){
   if(!req.body)return res.status(400).json("Post HTTP Data not Provided");
   let{name,type,amount} = req.body;
 
-  const create = await new model.Transaction(
+  const create = await new model.transaction(
     {
       name,
       type,
@@ -42,9 +42,47 @@ async function create_Transaction(req,res){
   });
 }
 
+// get:http://localhost:8080/api/transaction
+async function get_transaction(req,res){
+  let data = await model.transaction.find({});
+  return res.json(data);
+}
+// delete:http://localhost:8080/api/transaction
+async function delete_transaction(req,res){
+  if(!req.body)res.status(400).json({message:"Request body not Found"});
+  await model.transaction.deleteOne(req.body,function(err){
+    if(!err)res.json("Record Deleted...!");
+  }).clone().catch(function(err){res.json("Error While Deleting Transaction Record")});
+}
+// get:http://localhost:8080/api/labels
+async function get_Labels(req,res){
+  model.transaction.aggregate([
+    {
+      $lookup : {
+        from:"categories",
+        localField:'type',
+        foreignField:"type",
+        as:"categories_info"
+      }
+    },
+    {
+      $unwind:"$categories_info"
+    }
+  ]).then(result=> {
+    let data=result.map(v=>Object.assign({},{_id:v._id,name:v.name,type:v.type,amount:v.amount,color:v.categories_info['color']}));
+    res.json(data);
+  }).catch(error=>{
+    res.status(400).json("Looup Collection Error");
+  })
+}
+
+
 module.exports = {
     create_Categories,
     get_Categories,
-    create_Transaction
+    create_transaction,
+    get_transaction ,
+    delete_transaction,
+    get_Labels
 
 }
