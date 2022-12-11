@@ -72,7 +72,7 @@ async function get_Labels(req,res){
     let data=result.map(v=>Object.assign({},{_id:v._id,name:v.name,type:v.type,amount:v.amount,color:v.categories_info['color']}));
     res.json(data);
   }).catch(error=>{
-    res.status(400).json("Looup Collection Error");
+    res.status(400).json("Lookup Collection Error");
   })
 }
 
