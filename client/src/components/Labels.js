@@ -1,4 +1,5 @@
 import React from "react";
+import{default as api}from '../store/apiSlice';
 
 // we iterate through obj by mapping function
 const obj =[
@@ -20,6 +21,12 @@ const obj =[
 ]
 
 export default function Labels(){
+
+
+    const {data,isFetching,isSuccess,isError}= api.useGetCategoriesQuery()
+    console.log(data)
+
+
     return(
         <>
         {obj.map((v,i)=><LabelComponent key={i}data={v}></LabelComponent>)}
