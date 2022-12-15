@@ -5,6 +5,7 @@ const baseURI='http://localhost:8080';
 export const apiSlice=createApi({
     baseQuery:fetchBaseQuery({baseUrl:baseURI}),
     endpoints: builder=>({
+<<<<<<< Updated upstream
         //get categories
         getCategories:builder.query({
             //get: 'http://localhost:8080/api/categories'
@@ -15,10 +16,22 @@ export const apiSlice=createApi({
         getLabels:builder.query({
             query:()=>'/api/labels',
             providesTags:['transaction']
+=======
+        // get categories
+        getCategories:builder.query({
+            //get: 'http://localhost:8080/api/categories'
+            query:()=>'/api/categories'
+        }),
+
+        // get labels
+        getLabels:builder.query({
+            query:() => '/api/labels'
+>>>>>>> Stashed changes
         }),
 
         //add new Transaction
         addTransaction:builder.mutation({
+<<<<<<< Updated upstream
             query:(initialTransaction)=>({
                 //post: 'http://localhost:8080/api/transaction
                 url:'/api/transaction',
@@ -37,6 +50,24 @@ export const apiSlice=createApi({
                 body:recordId
             }),
             invalidatesTags:['transaction']
+=======
+            query:(initialTransaction) =>({
+                //post: 'http://localhost:8080/api/transaction'
+                url:'/api/transaction',
+                method:"POST",
+                body:initialTransaction
+            })
+        }),
+
+        // delete record
+        deleteTransaction:builder.mutation({
+            query:recordId => ({
+                //delete: 'http://localhost:8080/api/transaction'
+                url:'/api/transaction',
+                method:"DELETE",
+                body:recordId
+            })
+>>>>>>> Stashed changes
         })
     })
 })

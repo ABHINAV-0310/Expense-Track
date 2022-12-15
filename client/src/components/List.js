@@ -7,6 +7,7 @@ export default function List(){
     let Transactions;
 
     if(isFetching){
+<<<<<<< Updated upstream
         Transactions=<div>Fetching</div>;
     }else if(isSuccess){
         Transactions= data.map((v,i)=><Transaction key={i}category={v}></Transaction>);
@@ -15,6 +16,15 @@ export default function List(){
     }
 
 
+=======
+        Transactions = <div>Fetching</div>
+    }else if(isSuccess){
+        Transactions = data.map((v,i)=><Transaction key={i}category={v}></Transaction>)
+    }else if(isError){    
+       Transactions = <div>Error</div>
+    }
+
+>>>>>>> Stashed changes
     return(
         <div className="flex flex-col py-6 gap-3">
             <h1 className='py-4 font-bold text-x'>History</h1>
@@ -28,7 +38,7 @@ function Transaction({category}){
     return(
         <div className="item flex justify-center bg-gray-50 py-2 rounded-r" style={{borderRight: `8px solid${category.color??"#e5e5e5"}`}}>
             <button className='px-3'><box-icon color={category.color??"#e5e5e5"} size="15px" name="trash"></box-icon></button>
-            <span className='block w-full'>{category.name??""}</span>
+            <span className='block w-full '>{category.name??""}</span>
         </div>
     )
 }
