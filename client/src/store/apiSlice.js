@@ -9,12 +9,12 @@ export const apiSlice=createApi({
         getCategories:builder.query({
             //get: 'http://localhost:8080/api/categories'
             query:()=>'/api/categories',
-           /* providesTags:['categories']*/
+          
         }),
         //get labels
         getLabels:builder.query({
             query:()=>'/api/labels',
-            /*providesTags:['transaction']*/
+            
         }),
 
         //add new Transaction
@@ -25,7 +25,7 @@ export const apiSlice=createApi({
                 method:"POST",
                 body:initialTransaction
             }),
-           /* invalidatesTags:['transaction']*/
+           
         }),
 
         //delete record
@@ -36,7 +36,7 @@ export const apiSlice=createApi({
                 method:"DELETE",
                 body:recordId
             }),
-            /*invalidatesTags:['transaction']*/
+           
         })
     })
 })
