@@ -1,8 +1,8 @@
 import React from "react";
-import 'boxicons';
+//import 'boxicons';
 import{default as api}from '../store/apiSlice';
 
-export default function List(){
+export default function List(){/*
     const {data,isFetching,isSuccess,isError}= api.useGetLabelsQuery()
     let Transactions;
 
@@ -13,12 +13,12 @@ export default function List(){
     }else if(isError){
         Transactions=<div>Error</div>
     }
-
+*/
 
     return(
         <div className="flex flex-col py-6 gap-3">
             <h1 className='py-4 font-bold text-x'>History</h1>
-            {Transactions}
+          
         </div>
     )
 }
